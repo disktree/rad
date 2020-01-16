@@ -1,37 +1,47 @@
 
-
 :root {
-  --background: #141419;
-  --f-high: #919794;
-  --f-med: #455A64;
-  --f-low: #2d2f2e;
-  --f-inv: #fff;
-  --b-high: #292b2b;
-  --b-med: #101111;
-  --b-low: #000000;
-  --b-inv: #000;
+	--background: #000;
+
+	--f-high: #fff;
+	--f-med: #fff;
+	--f-low: #fff;
+	--f-inv: #000;
+
+	--b-high: #000;
+	--b-med: #000;
+	--b-low: #000;
+	--b-inv: #fff;
 }
 
 @font-face {
-  font-family: 'FontTitle';
-  font-display: block;
-  src: url('fnt/helvetica_neue_65.woff2') format('woff2'), url('../fnt/helvetica_neue_65.woff') format('woff'), url('../fnt/helvetica_neue_65.ttf') format('truetype');
+	font-family: 'FontTitle';
+	font-display: block;
+	src:
+		url('fnt/helvetica_neue_65.woff2') format('woff2'),
+		url('../fnt/helvetica_neue_65.woff') format('woff'),
+		url('../fnt/helvetica_neue_65.ttf') format('truetype');
 }
-
+	/*
+	
 @keyframes square-spin {
 	25%  { transform: perspective(100px) rotateX(180deg) rotateY(0); }
 	50%  { transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
 	75%  { transform: perspective(100px) rotateX(0) rotateY(180deg); }
 	100% { transform: perspective(100px) rotateX(0) rotateY(0); }
 }
+*/
 
 body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	font-family: 'FontRegular';
+	font-family: monospace;
     background: var(--background);
     color: var(--f-med);
+}
+
+a {
+	color: var(--f-med);
 }
 
 h1 {
@@ -75,4 +85,11 @@ canvas.spectrum {
 	z-index: -1;
 	-webkit-user-select: none;
 	pointer-events: none;
+}
+
+footer {
+	position: fixed;
+	right: 16px;
+	bottom: 16px;
+	font-family: monospace;
 }

@@ -4,25 +4,23 @@ import js.Browser.document;
 import js.Browser.window;
 import js.html.CanvasElement;
 import js.html.CanvasRenderingContext2D;
-import js.html.Uint8Array;
 import js.html.audio.AnalyserNode;
 import js.html.audio.AudioContext;
+import js.lib.Uint8Array;
 
 class App {
 
 	static var canvas : CanvasElement;
 	static var ctx : CanvasRenderingContext2D;
 	static var analyser : AnalyserNode;
-	//static var freqData : Uint8Array;
 	static var timeData : Uint8Array;
-	static var color = "#455A64";
+	static var color = "#fff";
 	static var started = false;
 
     static function update( time : Float ) {
 
 		window.requestAnimationFrame( update );
 
-		//analyser.getByteFrequencyData( freqData );
 		analyser.getByteTimeDomainData( timeData );
 
 		ctx.clearRect( 0, 0, canvas.width, canvas.height );
@@ -32,16 +30,6 @@ class App {
 		var y : Float;
 		var hw = canvas.width/2;
 		var hh = canvas.height/2;
-
-		/*
-		ctx.fillStyle = color;
-		for( i in 0...analyser.frequencyBinCount ) {
-			v = timeData[i];
-			x = i * (canvas.width / analyser.frequencyBinCount);
-			y = hh - (canvas.height * (v / analyser.fftSize)) / 2;
-			ctx.fillRect( x, y, 1, 2 );
-		}
-		*/
 
 		ctx.strokeStyle = color;
 		ctx.lineWidth = 1;
@@ -77,27 +65,22 @@ class App {
 
 			btn.onclick = function() {
 
-				//btn.remove();
-
 				btn.textContent = 'CONNECTING';
 				btn.onclick = null;
 
 				ctx = canvas.getContext2d();
 
 				var audioElement = document.createAudioElement();
+				//audioElement.autoplay = true;
 				//audioElement.preload = "metadata";
 				audioElement.preload = "none";
 				audioElement.crossOrigin = "anonymous";
 				audioElement.controls = false;
-				//audioElement.autoplay = true;
-				//main.appendChild( audioElement );
 				audioElement.play();
-
-				trace(audioElement.volume);
 
 				var sourceElement = document.createSourceElement();
 				sourceElement.type = 'application/ogg';
-				sourceElement.src = 'http://195.201.41.121:8000/panzer';
+				sourceElement.src = 'http://195.201.41.121:8000/panzerradio';
 				audioElement.appendChild( sourceElement );
 
 				/*
@@ -105,11 +88,9 @@ class App {
 					trace(e);
 				}
 				*/
-
 				audioElement.onpause = function(e) {
 					trace(e);
 				}
-
 				audioElement.onplaying = function() {
 
 					if( started )
@@ -123,7 +104,7 @@ class App {
 
 					var audio = new AudioContext();
 
-					//var gain 
+					//var gain
 
 					analyser = audio.createAnalyser();
 					//analyser.fftSize = 2048;
@@ -142,8 +123,6 @@ class App {
 					window.requestAnimationFrame( update );
 				}
 			}
-
-
 		}
     }
 
